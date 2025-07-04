@@ -37,3 +37,35 @@
 git clone https://github.com/Eveeeenone/tarot-reader.git
 cd tarot-reader
 ```
+
+2. **安装依赖**
+```bash
+pip install -r requirements.txt
+```
+
+3. **配置环境变量**
+   - 在项目根目录创建一个`.env`文件
+   - 添加`OPENROUTER_API_KEY=your_api_key`
+
+4. **运行应用**
+```bash
+python app.py
+```
+
+5. **访问应用**
+   - 在浏览器中打开`http://localhost:5000`
+   - 开始占卜吧！
+
+## 🤝 贡献
+
+欢迎任何形式的贡献，包括但不限于：
+
+- 报告问题
+- 建议新功能
+- 提交代码修复
+
+请查看`CONTRIBUTING.md`文件以了解更多详细信息。
+
+## 📜 许可证
+
+本项目基于MIT许可证。详情请查看`LICENSE`文件。
