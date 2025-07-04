@@ -53,7 +53,7 @@ python app.py
 ```
 
 5. **访问应用**
-   - 在浏览器中打开`http://localhost:5000`
+   - 在浏览器中打开`http://localhost:8000`
    - 开始占卜吧！
 
 ## 🤝 贡献
