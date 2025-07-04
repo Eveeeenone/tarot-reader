@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔮 智能塔罗牌占卜</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <header class="header">
+            <h1><i class="fas fa-crystal-ball"></i> 智能塔罗牌占卜</h1>
+            <p>探索内心智慧，寻找人生指引</p>
+        </header>
+
+        <!-- 主要内容区域 -->
+        <main class="main-content">
+            <!-- 步骤1: 输入问题 -->
+            <section id="question-section" class="section active">
+                <div class="card">
+                    <h2><i class="fas fa-question-circle"></i> 选择占卜模式</h2>
+                    
+                    <!-- 模式选择 -->
+                    <div class="mode-selection">
+                        <div class="mode-option" id="guided-mode">
+                            <div class="mode-icon"><i class="fas fa-magic"></i></div>
+                            <h3>AI引导模式</h3>
+                            <p>输入问题，让AI为您推荐最合适的牌阵</p>
+                            <span class="mode-tag">推荐新手</span>
+                        </div>
+                        <div class="mode-option" id="expert-mode">
+                            <div class="mode-icon"><i class="fas fa-user-graduate"></i></div>
+                            <h3>自由选择模式</h3>
+                            <p>直接选择牌阵，适合有经验的用户</p>
+                            <span class="mode-tag">适合进阶</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 引导模式的问题输入区域 -->
+                    <div id="guided-input" class="input-section" style="display: none;">
+                        <h3><i class="fas fa-question-circle"></i> 请输入您的问题</h3>
+                        <div class="input-group">
+                            <textarea id="question-input" placeholder="请输入您想要占卜的问题...\n例如：我的事业发展如何？\n我和某人的关系会如何发展？\n我应该如何做出这个重要决定？" rows="4"></textarea>
+                            <button id="get-recommendations" class="btn btn-primary">
+                                <i class="fas fa-magic"></i> 获取AI推荐牌阵
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- 自由模式的可选问题输入 -->
+                    <div id="expert-input" class="input-section" style="display: none;">
+                        <h3><i class="fas fa-cards-blank"></i> 选择牌阵开始占卜</h3>
+                        <div class="input-group">
+                            <textarea id="optional-question" placeholder="您可以在此输入问题（可选）...\n这将帮助AI更好地解读卡牌含义" rows="2"></textarea>
+                            <button id="show-all-spreads" class="btn btn-primary">
+                                <i class="fas fa-th-large"></i> 选择牌阵
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- 返回模式选择按钮 -->
+                    <div class="section-actions" id="back-to-mode" style="display: none;">
+                        <button id="back-to-mode-selection" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> 返回模式选择
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 步骤2: 选择牌阵 -->
+            <section id="spread-section" class="section">
+                <div class="card">
+                    <h2><i class="fas fa-star"></i> AI推荐牌阵</h2>
+                    <div id="recommended-spreads" class="spreads-grid"></div>
+                    
+                    <h3><i class="fas fa-list"></i> 所有可选牌阵</h3>
+                    <div id="all-spreads" class="spreads-grid"></div>
+                    
+                    <div class="section-actions">
+                        <button id="back-to-question" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> 返回
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 步骤3: 抽牌结果 -->
+            <section id="cards-section" class="section">
+                <div class="card">
+                    <h2 id="spread-title"><i class="fas fa-cards-blank"></i> 抽牌结果</h2>
+                    <div id="spread-description" class="spread-description"></div>
+                    <div id="question-display" class="question-display"></div>
+                    
+                    <div id="cards-container" class="cards-container"></div>
+                    
+                    <div class="section-actions">
+                        <button id="get-interpretation" class="btn btn-primary">
+                            <i class="fas fa-brain"></i> 获取AI解读
+                        </button>
+                        <button id="new-reading" class="btn btn-secondary">
+                            <i class="fas fa-redo"></i> 新的占卜
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 步骤4: AI解读 -->
+            <section id="interpretation-section" class="section">
+                <div class="card">
+                    <h2><i class="fas fa-eye"></i> AI深度解读</h2>
+                    <div id="interpretation-content" class="interpretation-content"></div>
+                    
+                    <div class="section-actions">
+                        <button id="save-reading" class="btn btn-success">
+                            <i class="fas fa-save"></i> 保存结果
+                        </button>
+                        <button id="new-reading-2" class="btn btn-secondary">
+                            <i class="fas fa-redo"></i> 新的占卜
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- 简化的导航栏（移除历史记录） -->
+        <nav class="navigation">
+            <button id="nav-home" class="nav-btn active" data-section="question-section">
+                <i class="fas fa-home"></i>
+                <span>首页</span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- 加载动画 -->
+    <div id="loading" class="loading hidden">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p>正在施展魔法...</p>
+        </div>
+    </div>
+
+    <!-- 消息提示 -->
+    <div id="message" class="message hidden"></div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
