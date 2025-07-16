@@ -1,11 +1,12 @@
 from flask import Flask, render_template, request, jsonify, send_from_directory
-import os
-import json
-from datetime import datetime
+from flask_cors import CORS
 from tarot_reader import TarotApp, TarotDeck, SpreadRecommender, LLMTarotInterpreter, ResultSaver, TarotReading
 
 app = Flask(__name__)
 app.secret_key = 'tarot_secret_key_2024'
+
+# 添加 CORS 支持
+CORS(app, origins=["http://localhost:5173"])  # Vue 3 开发服务器默认端口
 
 # 初始化塔罗牌组件
 tarot_deck = TarotDeck()
